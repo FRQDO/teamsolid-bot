@@ -5,7 +5,7 @@ This repository contains horrbile code.
 
 ## Links
 
-* [https://discordpy.readthedocs.io/en/latest/index.html(https://discordpy.readthedocs.io/en/latest/index.html)
+* [https://discordpy.readthedocs.io/en/latest/index.html](https://discordpy.readthedocs.io/en/latest/index.html)
 
 ## Config
 
