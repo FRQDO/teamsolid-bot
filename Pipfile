@@ -8,6 +8,3 @@ verify_ssl = true
 [packages]
 discord-py = "*"
 markovify = "*"
-
-[requires]
-python_version = "3.7"

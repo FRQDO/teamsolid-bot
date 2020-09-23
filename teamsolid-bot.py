@@ -15,12 +15,14 @@ from config import data_path
 latest_markov_use = datetime.date.min
 bot = discord.Client()
 
+
 @bot.event
 async def on_ready():
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
     print('------')
+
 
 @bot.event
 async def on_message(message):
@@ -43,15 +45,14 @@ async def on_message(message):
         else:
             await message.channel.send("Nur einmal am Tag!")
 
-    
     if "good bot" in c.lower() or "guter bot" in c.lower():
         await message.add_reaction('\N{GRINNING FACE WITH SMILING EYES}')
     if "bad bot" in c.lower() or "böser bot" in c.lower():
         await message.add_reaction('\N{POUTING FACE}')
-    if (message.author != bot.user and 
-            ("olid" in c.lower().replace(' ', '') or 
-            "dilo" in c.lower().replace(' ', '') or
-            "olaf" in c.lower().replace(' ', ''))):
+    if (message.author != bot.user and
+            ("olid" in c.lower().replace(' ', '') or
+             "dilo" in c.lower().replace(' ', '') or
+             "olaf" in c.lower().replace(' ', ''))):
         await message.add_reaction('\N{WAVING HAND SIGN}')
     if c.startswith('!olid') or c.startswith('!o'):
         await olid(message)
@@ -71,6 +72,7 @@ async def on_message(message):
         elif len(cs) > 1:
             await citation(message, "orakel.pickle", cs[1])
 
+
 async def markov(message):
     try:
         with open(data_path + message.channel.name + ".log", "r") as f:
@@ -80,6 +82,7 @@ async def markov(message):
 
     except (OSError, IOError, EOFError):
         pass
+
 
 async def olid(message):
     olidlist = [
@@ -93,18 +96,20 @@ async def olid(message):
         '*Olid*',
         '**olid**',
         '***OlId***',
-        "```\n" + 
-        rektangle("OLID", randint(2,6), randint(2,6))+ 
+        "```\n" +
+        rektangle("OLID", randint(2, 6), randint(2, 6)) +
         "```\n",
         '__olid__',
         'https://i.imgur.com/JW6YLy9.jpg',
     ]
     await message.channel.send(choice(olidlist))
 
-async def rekt(message, r : str, x : int, y : int):
-    await message.channel.send("```\n" + 
-                  rektangle(r, width=x, height=y) +
-                  "```\n")
+
+async def rekt(message, r: str, x: int, y: int):
+    await message.channel.send("```\n" +
+                               rektangle(r, width=x, height=y) +
+                               "```\n")
+
 
 async def citation(message, filename, *quote):
     """Print, Add, and Delete Quotes."""
@@ -141,7 +146,8 @@ async def citation(message, filename, *quote):
 def rektangle(text, width=1, height=1):
     result = [' '.join(['{}'.format(i) for i in text])]
     for i in range(1, len(text) - 1):
-        result.append(text[i] + ' ' * ((len(text) - 2) * 2 + 1) + text[len(text) - i - 1])
+        result.append(text[i] + ' ' * ((len(text) - 2)
+                                       * 2 + 1) + text[len(text) - i - 1])
     result.append(' '.join(['{}'.format(i) for i in text[::-1]]))
     for _ in range(1, width):
         result = [line + line[-2:-2 * len(text):-1] for line in result]
@@ -149,5 +155,6 @@ def rektangle(text, width=1, height=1):
         result.extend(result[-2:-len(text) - 1:-1])
     result = '\n'.join(result)
     return result.format(*list(text))
+
 
 bot.run(key)
