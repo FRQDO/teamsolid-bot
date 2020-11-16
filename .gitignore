@@ -281,4 +281,4 @@ $RECYCLE.BIN/
 *.log
 *.pickle
 config.py
-
+config.ts
