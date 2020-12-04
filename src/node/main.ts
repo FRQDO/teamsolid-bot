@@ -45,3 +45,5 @@ client.on('message', message => {
 client.login(TOKEN)
     .then(() => console.log('Logging in ...'))
     .catch(console.error);
+
+new Discord.Collection();

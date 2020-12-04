@@ -3,38 +3,63 @@
 Be ware!
 This repository contains horrbile code.
 
+
+## ToDo
+
+* help
+* save and load
+* good bot
+* bad bot
+* olid
+* rekt
+* quote
+* oracle
+* rekt
+* markov
+* config startup scripts
+* rollupjs: bundle
+
+* Inspirational Pictures
+* rss-feed
+* twitch-feed
+* music
+* soundboard
+* roles by emoji-recation
+
+
 ## Links
 
-* [https://discordpy.readthedocs.io/en/latest/index.html](https://discordpy.readthedocs.io/en/latest/index.html)
+* https://discordjs.guide/
+* https://discord.js.org/
 
 ## Config
 
 ~~~bash
-cp config.py.example config.py
+cp src/node/config.ts.example src/node/config.ts
 ~~~
 
-Then edit config.py to your needs.
+Then edit config.ts to your needs.
 
 ## Install with pipenv
 
-Requires `pipenv` and `pyenv`.
+* Requires node, and npm/yarn
 
-```bash
-pipenv install
-```
+~~~
+yarn install
+~~~
 
 ## Run
 
 ### Quick
 
 ~~~bash
-pipenv run python3 teamsolid-bot.py
+yarn tsc && yarn start
 ~~~
 
 ### With tmux
 
 ~~~bash
-tmux new-session -d -s tsb 'pipenv run python3 teamsolid-bot.py'
+tmux new-session -d -s tsb 'yarn tsc && yarn start'
 ~~~
 
 or:
