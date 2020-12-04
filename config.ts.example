@@ -1,4 +1,0 @@
-import { Intents } from 'https://raw.githubusercontent.com/harmony-org/harmony/main/mod.ts'
-
-export const TOKEN = 'vqzboBdAkVQOYdeFkTrGpe6fZ2e9T2iWyJUF2PP2jbS7MEEHLm0TACrKcin';
-export const INTENTS = Intents.All;
