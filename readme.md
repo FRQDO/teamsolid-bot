@@ -6,14 +6,14 @@ This repository contains horrbile code.
 
 ## ToDo
 
-* help
-* save and load
-* good bot
-* bad bot
-* olid
+* Better name for this bot.
+
 * rekt
-* quote
+* save and load
+  * Saving and loading quotes
+  * logging messages to file
 * oracle
+* quote
 * rekt
 * markov
 * config startup scripts
@@ -25,6 +25,10 @@ This repository contains horrbile code.
 * music
 * soundboard
 * roles by emoji-recation
+
+* Splitting things into files
+  * logging
+  * commands
 
 
 ## Links
