@@ -1,14 +1,12 @@
+import Discord from 'discord.js';
+import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import fs from 'fs';
-
-import Discord from 'discord.js';
-
-import { IConfig } from './IConfig.js';
-import { log_received_message, } from './log.js';
-import { olid } from './olid.js';
-import { help } from './help.js';
 import { good_bot_bad_bot } from './good_bot_bad_bot.js';
+import { help } from './help.js';
+import { IConfig } from './IConfig.js';
+import { log_received_message } from './log.js';
+import { olid } from './olid.js';
 
 
 // Load Configuration

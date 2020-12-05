@@ -1,4 +1,4 @@
-import { TextChannel, NewsChannel, Message } from 'discord.js';
+import { Message, NewsChannel, TextChannel } from 'discord.js';
 
 
 export function log_received_message(message: Message): void {

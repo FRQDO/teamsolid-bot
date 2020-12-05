@@ -1,6 +1,6 @@
 import { Message } from 'discord.js';
-import { config } from './main.js';
 import { log_sended_message } from './log.js';
+import { config } from './main.js';
 
 
 const help_text =

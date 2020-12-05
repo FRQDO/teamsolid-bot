@@ -1,7 +1,7 @@
 import { Message } from 'discord.js';
+import { log_sended_message } from './log.js';
 import { config } from './main.js';
 import { choice } from './utils.js';
-import { log_sended_message } from './log.js';
 
 
 const olidlist: string[] = [
