@@ -14,7 +14,6 @@ This repository contains horrbile code.
   * logging messages to file
 * oracle
 * quote
-* rekt
 * markov
 * config startup scripts
 * rollupjs: bundle
