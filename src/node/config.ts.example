@@ -1,3 +1,0 @@
-export const TOKEN = 'vqzboBdAkVQOYdeFkTrGpe6fZ2e9T2iWyJUF2PP2jbS7MEEHLm0TACrKcin';
-export const PREFIX = '!';
-export const BOTNAME = 'TeamSolid-Bot';

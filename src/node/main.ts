@@ -1,14 +1,24 @@
-// Import the discord.js module
-import Discord, { TextChannel, NewsChannel, Message } from 'discord.js';
-import { TOKEN, PREFIX, BOTNAME } from './config.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
+import Discord, { TextChannel, NewsChannel, Message } from 'discord.js';
+
+import { IConfig } from './IConfig.js';
+import { readSync } from './fs.js';
+
+
+const relative_config_path = '../settings.json';
+const script_dir: string = path.dirname(fileURLToPath(import.meta.url));
+const absolute_config_path: string = path.resolve(script_dir, relative_config_path);
+const file_string: string = readSync(absolute_config_path);
+const config: IConfig = JSON.parse(file_string) as IConfig;
 
 const help_text =
-    `Hello, this is ${BOTNAME}. :wave:
+    `Hello, this is ${config.bot_name}. :wave:
 
 Commands
 
-${PREFIX}help: Display this help.`;
+${config.prefix}help: Display this help.`;
 
 const olidlist: string[] = [
     'Olid!',
@@ -69,10 +79,10 @@ def rektangle(text, width=1, height=1):
  * @param  {} height=1
  * @returns string
  */
-function rektangle(text: string, width = 1, height = 1): string {
-    // TODO
-    return '';
-}
+// function rektangle(text: string, width = 1, height = 1): string {
+//     // TODO
+//     return '';
+// }
 
 
 // Create an instance of a Discord client
@@ -83,7 +93,7 @@ const client = new Discord.Client();
  * received from Discord
  */
 client.on('ready', () => {
-    console.log(`${BOTNAME} is ready.`);
+    console.log(`${config.bot_name} is ready.`);
 });
 
 function logReceivedMessage(message: Message): void {
@@ -101,11 +111,11 @@ function logSendedMessage(message: Message): void {
 client.on('message', message => {
     logReceivedMessage(message);
 
-    if (message.content === `${PREFIX}olid`) {
+    if (message.content === `${config.prefix}olid`) {
         message.channel.send(choice(olidlist))
             .then(logSendedMessage)
             .catch(console.error);
-    } else if (message.content === `${PREFIX}help`) {
+    } else if (message.content === `${config.prefix}help`) {
         message.channel.send(help_text)
             .then(logSendedMessage)
             .catch(console.error);
@@ -127,6 +137,6 @@ client.on('message', message => {
 });
 
 // Log our bot in using the token from https://discord.com/developers/applications
-client.login(TOKEN)
+client.login(config.token)
     .then(() => console.log('Logging in ...'))
     .catch(console.error);

@@ -3,7 +3,8 @@
 *.log
 *.pickle
 config.py
-config.ts
+settings.json
+
 
 # Created by https://www.toptal.com/developers/gitignore/api/linux,macos,python,pycharm,windows,visualstudiocode,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=linux,macos,python,pycharm,windows,visualstudiocode,node
