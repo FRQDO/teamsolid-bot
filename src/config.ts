@@ -1,7 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { IConfig } from './IConfig.js';
+
+export interface IConfig {
+    token: string;
+    prefix: string;
+    bot_name: string;
+    data_dir: string;
+    assets_dir: string;
+}
 
 
 // Load Configuration
