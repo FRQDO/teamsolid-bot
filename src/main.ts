@@ -8,7 +8,7 @@ import { quotes } from './quotes.js';
 import { yes_no } from './yes_no.js';
 
 
-const client = new Discord.Client();
+export const client = new Discord.Client();
 
 /**
  * The ready event is vital, it means that only _after_ this will your bot start reacting to information
