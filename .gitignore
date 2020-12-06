@@ -4,6 +4,7 @@
 *.pickle
 config.py
 settings.json
+data/
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/linux,macos,python,pycharm,windows,visualstudiocode,node
