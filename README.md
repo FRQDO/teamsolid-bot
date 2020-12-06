@@ -1,18 +1,11 @@
 # TeamSolid Bot
 
-Be ware!
-This repository contains horrbile code.
-
 ## ToDo
 
 * Better name for this bot.
 * Better Avatar
 
 * markov
-
-* update install instructions
-* config startup scripts
-* document file structur
 
 ### Ideas
 
@@ -34,34 +27,37 @@ This repository contains horrbile code.
 * https://discord.js.org/
 * https://discord.com/developers/applications
 
+## Install
+
+* Install Node.js for example with [nvm](https://github.com/nvm-sh/nvm).
+* Install and update Yarn.
+  * https://yarnpkg.com/getting-started/install
+  * npm install -g yarn
+  * `yarn set version latest`
+* `git clone ...`
+* `yarn install`
+* `chmod 755 teamsolid-bot`
+
 ## Config
 
 ~~~bash
-cp src/node/config.ts.example src/node/config.ts
+cp settings.json.example settings.json
 ~~~
 
-Then edit config.ts to your needs.
-
-## Install with pipenv
-
-* Requires node, and npm/yarn
-
-~~~
-yarn install
-~~~
+Then edit `settings.json` to your needs.
 
 ## Run
 
 ### Quick
 
 ~~~bash
-yarn tsc && yarn start
+node dist/main.js
 ~~~
 
 ### With tmux
 
 ~~~bash
-tmux new-session -d -s tsb 'yarn tsc && yarn start'
+tmux new-session -d -s tsb 'node dist/main.js'
 ~~~
 
 or:
@@ -69,7 +65,6 @@ or:
 ~~~bash
 ./teamsolid-bot
 ~~~
-
 
 ### Attach Session
 
