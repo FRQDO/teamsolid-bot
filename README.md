@@ -3,32 +3,29 @@
 Be ware!
 This repository contains horrbile code.
 
-
 ## ToDo
 
-* Better name for this bot.
-
 * rekt
-* save and load
-  * Saving and loading quotes
-  * logging messages to file
+* logging messages to file
 * oracle
-* quote
 * markov
+* olid: load the list from JSON
+* organize which data should be in the git repository
+* update install instructions
 * config startup scripts
-* rollupjs: bundle
 
+### Ideas
+
+* Better name for this bot.
+* Better Avatar
 * Inspirational Pictures
 * rss-feed
 * twitch-feed
 * music
 * soundboard
 * roles by emoji-recation
-
-* Splitting things into files
-  * logging
-  * commands
-
+* generate a tiny sprite sheet https://codepen.io/KilledByAPixel/pen/ZEWyRwO?editors=0010
+* make fancy output
 
 ## Links
 
