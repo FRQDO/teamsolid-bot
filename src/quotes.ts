@@ -35,12 +35,13 @@ function save_quotes(): void {
 
 export function quotes(message: Message): void {
     if (message.content.trim() === `${config.prefix}${command}` || message.content.trim() === `${config.prefix}${c}`) {
-        message.channel.send(choice(quotes_data))
+        const quote = choice(quotes_data) ?? 'No quotations found ...';
+        message.channel.send(quote)
             .then(log_sended_message)
             .catch(console.error);
     } else if (
-        message.content.trim().startsWith(`${config.prefix}${command}`)
-        || message.content.trim().startsWith(`${config.prefix}${c}`)
+        message.content.trim().startsWith(`${config.prefix}${command}`) ||
+        message.content.trim().startsWith(`${config.prefix}${c}`)
     ) {
         // Save or Delete quote
         let prefix_length = 0;
