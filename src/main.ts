@@ -1,20 +1,11 @@
 import Discord from 'discord.js';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { config } from './config.js';
 import { good_bot_bad_bot } from './good_bot_bad_bot.js';
 import { help } from './help.js';
-import { IConfig } from './IConfig.js';
 import { log_received_message } from './log.js';
 import { olid } from './olid.js';
-
-
-// Load Configuration
-const relative_config_path = '../settings.json';
-const script_dir: string = path.dirname(fileURLToPath(import.meta.url));
-const absolute_config_path: string = path.resolve(script_dir, relative_config_path);
-const file_string: string = fs.readFileSync(absolute_config_path, 'utf-8');
-export const config: IConfig = JSON.parse(file_string) as IConfig;
+import { quotes } from './quotes.js';
+import { yes_no } from './yes_no.js';
 
 
 const client = new Discord.Client();
@@ -30,9 +21,11 @@ client.on('ready', () => {
 // Create an event listener for messages
 client.on('message', message => {
     log_received_message(message);
-    olid(message);
     help(message);
+    olid(message);
     good_bot_bad_bot(message);
+    quotes(message);
+    yes_no(message);
 });
 
 client.login(config.token)

@@ -1,8 +1,13 @@
 import { Message } from 'discord.js';
+import { config } from './config.js';
 import { log_sended_message } from './log.js';
-import { config } from './main.js';
 import { choice } from './utils.js';
 
+
+const command = 'olid';
+const c = 'o';
+export const olid_help =
+    `${config.prefix}${command}/${config.prefix}${c} - Greet with a friendly: “Olid!”`;
 
 const olidlist: string[] = [
     'Olid!',
@@ -24,7 +29,7 @@ const olidlist: string[] = [
 
 
 export function olid(message: Message): void {
-    if (message.content === `${config.prefix}olid`) {
+    if (message.content.trim() === `${config.prefix}${command}` || message.content.trim() === `${config.prefix}${c}`) {
         message.channel.send(choice(olidlist))
             .then(log_sended_message)
             .catch(console.error);
