@@ -1,0 +1,3 @@
+[submodule "src/ts-markov"]
+	path = src/ts-markov
+	url = git@github.com:mogoh/ts-markov.git
