@@ -5,19 +5,20 @@ This repository contains horrbile code.
 
 ## ToDo
 
-* rekt
-* logging messages to file
-* oracle
+* Better name for this bot.
+* Better Avatar
+
 * markov
-* olid: load the list from JSON
-* organize which data should be in the git repository
+
 * update install instructions
 * config startup scripts
+* document file structur
 
 ### Ideas
 
-* Better name for this bot.
-* Better Avatar
+* olid: send image direct.
+* oracle
+* rekt
 * Inspirational Pictures
 * rss-feed
 * twitch-feed
@@ -31,6 +32,7 @@ This repository contains horrbile code.
 
 * https://discordjs.guide/
 * https://discord.js.org/
+* https://discord.com/developers/applications
 
 ## Config
 
