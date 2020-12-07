@@ -5,10 +5,6 @@ import fs from 'fs';
 import path from 'path';
 
 
-
-new MarkovString();
-
-
 const command = 'markov';
 const c = 'm';
 export const markov_help =
@@ -18,7 +14,6 @@ export const markov_help =
 // Load
 const file_name = 'TeamSolid_teamsolid.log';
 const absolute_quotes_path: string = path.resolve(config.data_dir, 'log', file_name);
-
 
 export function markov(message: Message): void {
     if (
@@ -31,6 +26,8 @@ export function markov(message: Message): void {
         markov.addStates(lines);
         markov.train();
         const response = markov.generateRandom(100);
-        message.channel.send(response);
+        message.channel.send(response)
+            .then(() => console.log('Reacting: ${response}'))
+            .catch(console.error);
     }
 }

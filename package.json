@@ -17,6 +17,7 @@
   "scripts": {
     "clean": "rm -r dist/*",
     "tsc": "tsc",
+    "tsc-debug": "tsc --sourceMap true",
     "start": "node dist/main.js"
   }
 }
