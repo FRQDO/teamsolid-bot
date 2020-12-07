@@ -7,7 +7,11 @@
 
 ### Ideas
 
+* markov: improve markov chain library
+* markov: save state between restart
 * olid: send image direct.
+* roles by emoji-recation
+* dice
 * oracle
 * rekt
 * Inspirational Pictures
@@ -15,7 +19,6 @@
 * twitch-feed
 * music
 * soundboard
-* roles by emoji-recation
 * generate a tiny sprite sheet https://codepen.io/KilledByAPixel/pen/ZEWyRwO?editors=0010
 * make fancy output
 
