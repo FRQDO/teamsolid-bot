@@ -30,12 +30,15 @@
 ## Install
 
 * Install Node.js for example with [nvm](https://github.com/nvm-sh/nvm).
+  * Install nvm
+  * Update node (optional): `nvm install node`
+  * Update npm (optional): `nvm install-latest-npm`
 * Install and update Yarn.
-  * https://yarnpkg.com/getting-started/install
-  * npm install -g yarn
-  * `yarn set version latest`
+  * [yarn](https://yarnpkg.com/getting-started/install)
+  * Install Yarn: `npm install -g yarn`
+  * Update Yarn: `yarn set version latest`
 * `git clone ...`
-* `yarn install`
+* Install dependencies: `yarn install`
 * `chmod 755 teamsolid-bot`
 
 ## Config
