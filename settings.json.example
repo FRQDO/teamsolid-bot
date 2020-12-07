@@ -3,5 +3,5 @@
     "prefix": "!",
     "bot_name": "TeamSolid-Bot",
     "data_dir": "/absolute/path/to/the/data",
-    "assets_dir": ""/absolute/path/to/the/assets/"
+    "assets_dir": "/absolute/path/to/the/assets/"
 }
