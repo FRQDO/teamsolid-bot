@@ -5,8 +5,6 @@
 * Better name for this bot.
 * Better Avatar
 
-* markov
-
 ### Ideas
 
 * olid: send image direct.

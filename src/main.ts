@@ -3,6 +3,7 @@ import { config } from './config.js';
 import { good_bot_bad_bot } from './good_bot_bad_bot.js';
 import { help } from './help.js';
 import { log_received_message } from './log.js';
+import { markov } from './markov.js';
 import { olid } from './olid.js';
 import { quotes } from './quotes.js';
 import { yes_no } from './yes_no.js';
@@ -26,6 +27,7 @@ client.on('message', message => {
     good_bot_bad_bot(message);
     quotes(message);
     yes_no(message);
+    markov(message);
 });
 
 client.login(config.token)

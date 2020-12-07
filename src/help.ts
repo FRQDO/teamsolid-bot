@@ -4,6 +4,7 @@ import { log_sended_message } from './log.js';
 import { olid_help } from './olid.js';
 import { quotes_help } from './quotes.js';
 import { yes_no_help } from './yes_no.js';
+import { markov_help } from './markov.js';
 
 
 const command = 'help';
@@ -19,7 +20,9 @@ ${olid_help}
 
 ${quotes_help}
 
-${yes_no_help}`;
+${yes_no_help}
+
+${markov_help}`;
 
 export function help(message: Message): void {
     if (message.content.trim() === `${config.prefix}${command}` || message.content.trim() === `${config.prefix}${c}`) {
