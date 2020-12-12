@@ -14,7 +14,7 @@ const command = 'quote';
 const c = 'q';
 export const quotes_help =
     `${config.prefix}${command}/${config.prefix}${c} - Display a quotation.
-${config.prefix}${command}/${config.prefix}${c} <Some fancy quoation> - Save or delete this very quoation.`;
+${config.prefix}${command}/${config.prefix}${c} <Some fancy quoation> - Save or delete this very quotation.`;
 
 // Load quotes
 const file_name = 'quotes.json';
