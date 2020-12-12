@@ -970,9 +970,9 @@ to-regex-range@^5.0.1:
     is-number "^7.0.0"
 
 ts-markov@*:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/ts-markov/-/ts-markov-0.0.3.tgz#5f94963cfeb2eb93c4319f9f79254e63dd430c57"
-  integrity sha512-gIpddaf7SPmHUtJfcNwfdQtTUerHn0HURG7ZWtkH2pVoWOxIwm5pAkfBkJGSgPMXOl3Dyo8sEE1OLU/JBGbCeg==
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/ts-markov/-/ts-markov-0.0.6.tgz#3c5408f0418b6304b294d886777939774fac3644"
+  integrity sha512-K1jzKcMyxEOc4nFDxTH1eAGtnZ6Z+KkURfukUAgJhZqkeMz1EzTmMjVm/VCnWdxgWJ7tRsN8th9QQkSsIj4/VQ==
 
 tslib@^1.8.1:
   version "1.14.1"
