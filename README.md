@@ -4,6 +4,8 @@
 
 * Better name for this bot.
 * Better Avatar
+* Error: ENOENT: no such file or directory, mkdir '/home/kuepel7l/mega/teamsolid/teamsolid-bot/data/log'
+* Markov: Don't crash on no log file.
 
 ### Ideas
 
@@ -39,7 +41,8 @@
   * Install Yarn: `npm install -g yarn`
   * Update Yarn: `yarn set version latest`
 * `git clone ...`
-* Install dependencies: `yarn install`
+* Install dependencies: `yarn install --dev`
+* yarn tsc
 * `chmod 755 teamsolid-bot`
 
 ## Config
