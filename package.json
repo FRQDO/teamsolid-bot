@@ -5,7 +5,8 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "*"
+    "discord.js": "*",
+    "ts-markov": "*"
   },
   "devDependencies": {
     "@types/node": "*",

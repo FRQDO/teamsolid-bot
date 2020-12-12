@@ -1,6 +1,6 @@
 import { Message } from 'discord.js';
 import { config } from './config.js';
-import { MarkovString } from './ts-markov/src/MarkovString.js';
+import { MarkovString } from 'ts-markov';
 import fs from 'fs';
 import path from 'path';
 import { get_current_day } from './utils.js';
