@@ -8,8 +8,8 @@ export interface IConfig {
     bot_name: string;
     data_dir: string;
     assets_dir: string;
+    markov_last_used?: string;
 }
-
 
 // Load Configuration
 const relative_config_path = '../settings.json';
@@ -24,3 +24,13 @@ try {
 }
 
 export const config: IConfig = JSON.parse(file_string) as IConfig;
+
+function save() {
+    const config_string = JSON.stringify(config, null, 4);
+    fs.writeFileSync(absolute_config_path, config_string);
+}
+
+export function set_makrov_last_used(last_used: string): void {
+    config.markov_last_used = last_used;
+    save();
+}

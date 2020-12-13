@@ -2,12 +2,9 @@
 
 ## ToDo
 
-* Markov save last used
-
 ### Ideas
 
 * markov: improve markov chain library
-* markov: save state between restart
 * olid: send image direct.
 * roles by emoji-recation
 * dice
