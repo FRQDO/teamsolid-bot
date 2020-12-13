@@ -2,10 +2,7 @@
 
 ## ToDo
 
-* Better name for this bot.
-* Better Avatar
-* Error: ENOENT: no such file or directory, mkdir '/home/kuepel7l/mega/teamsolid/teamsolid-bot/data/log'
-* Markov: Don't crash on no log file.
+* Markov save last used
 
 ### Ideas
 

@@ -7,7 +7,7 @@ import { choice } from './utils.js';
 
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface IQuotes extends Array<string> {}
+interface IQuotes extends Array<string> { }
 
 
 const command = 'quote';
@@ -29,7 +29,10 @@ if (fs.existsSync(absolute_quotes_path)) {
 }
 
 function save_quotes(): void {
-    const quote_string = JSON.stringify(quotes_data);
+    const quote_string = JSON.stringify(quotes_data, null, 4);
+    if (!fs.existsSync(absolute_quotes_path)) {
+        fs.mkdirSync(config.data_dir, { recursive: true });
+    }
     fs.writeFileSync(absolute_quotes_path, quote_string);
 }
 
