@@ -25,10 +25,10 @@ export function markov(message: Message): void {
                 const text = fs.readFileSync(absolute_path_log, 'utf-8');
                 set_makrov_last_used(get_current_day());
                 const markov = new MarkovString();
-                const lines = text.split('\n');
-                markov.addStates(lines);
+                // const lines = text.split('\n');
+                markov.addTextUnsplit(text);
                 markov.train();
-                const response = markov.generateRandom(100);
+                const response = markov.generateString(100);
                 message.channel.send(response)
                     .then(() => console.log(`Responding: ${response}`))
                     .catch(console.error);
