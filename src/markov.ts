@@ -24,7 +24,7 @@ export function markov(message: Message): void {
             try {
                 const text = fs.readFileSync(absolute_path_log, 'utf-8');
                 set_makrov_last_used(get_current_day());
-                const markov = new MarkovString();
+                const markov = new MarkovString(2);
                 // const lines = text.split('\n');
                 markov.addTextUnsplit(text);
                 markov.train();
