@@ -14,6 +14,7 @@ export const markov_help =
 
 const file_name = 'TeamSolid_teamsolid.log';
 const absolute_path_log: string = path.resolve(config.data_dir, 'log', file_name);
+const ORDER = 1;
 
 export function markov(message: Message): void {
     if (
@@ -24,7 +25,7 @@ export function markov(message: Message): void {
             try {
                 const text = fs.readFileSync(absolute_path_log, 'utf-8');
                 set_makrov_last_used(get_current_day());
-                const markov = new MarkovString(2);
+                const markov = new MarkovString(ORDER);
                 // const lines = text.split('\n');
                 markov.addTextUnsplit(text);
                 markov.train();
