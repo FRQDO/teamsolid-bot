@@ -20,7 +20,6 @@
     "clean": "rm -r dist/*",
     "tsc": "tsc",
     "tsc-debug": "tsc --sourceMap true",
-    "start": "node dist/main.js",
-    "all": "yarn clean && yarn tsc && yarn start"
+    "start": "yarn clean && yarn tsc && yarn start"
   }
 }
