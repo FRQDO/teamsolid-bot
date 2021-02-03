@@ -87,7 +87,7 @@ class TwitchStreams {
     }
 
     get_channel(): TextChannel | undefined {
-        const channel_id = "431445289790865412";
+        const channel_id = config.twitch.channel_id;
         return this.client.channels.cache.get(channel_id) as TextChannel | undefined;
     }
 
