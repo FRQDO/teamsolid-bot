@@ -7,6 +7,7 @@ import { markov } from './markov.js';
 import { olid } from './olid.js';
 import { quotes } from './quotes.js';
 import { yes_no } from './yes_no.js';
+import { twitch } from "./twitch.js";
 
 
 export const client = new Discord.Client();
@@ -17,6 +18,7 @@ export const client = new Discord.Client();
  */
 client.on('ready', () => {
     console.log(`${config.bot_name} is ready.`);
+    twitch(client);
 });
 
 // Create an event listener for messages

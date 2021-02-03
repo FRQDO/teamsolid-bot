@@ -3,5 +3,17 @@
     "prefix": "!",
     "bot_name": "TeamSolid-Bot",
     "data_dir": "/absolute/path/to/the/data",
-    "assets_dir": "/absolute/path/to/the/assets/"
+    "assets_dir": "/absolute/path/to/the/assets/",
+    "twitch": {
+        "client_id": "gjfdkslghfdjksglfdshjk",
+        "client_secret": "fgfhdksalfhjdsklfnejwm",
+        "update_interval": 60000,
+        "streams": [
+            "mogoh",
+            "jidduu",
+            "normanhome",
+            "spark_the_fox"
+        ],
+        "channel_id": "7548392057342895"
+    }
 }

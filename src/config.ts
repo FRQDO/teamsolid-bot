@@ -9,6 +9,13 @@ export interface IConfig {
     data_dir: string;
     assets_dir: string;
     markov_last_used?: string;
+    twitch: {
+        client_id: string;
+        client_secret: string;
+        streams: string[];
+        update_interval: number;
+        channel_id: string;
+    }
 }
 
 // Load Configuration

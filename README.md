@@ -13,6 +13,7 @@
 * Inspirational Pictures
 * rss-feed
 * twitch-feed
+  * configure streams to display manualy
 * music
 * soundboard
 * generate a tiny sprite sheet https://codepen.io/KilledByAPixel/pen/ZEWyRwO?editors=0010
