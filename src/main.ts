@@ -1,13 +1,13 @@
-import Discord from 'discord.js';
-import { config } from './config.js';
-import { good_bot_bad_bot } from './good_bot_bad_bot.js';
-import { help } from './help.js';
-import { log_received_message } from './log.js';
-import { markov } from './markov.js';
-import { olid } from './olid.js';
-import { quotes } from './quotes.js';
-import { yes_no } from './yes_no.js';
-import { twitch } from "./twitch.js";
+import Discord from "discord.js";
+import { config } from "./config.js";
+import { good_bot_bad_bot } from "./good_bot_bad_bot.js";
+import { help } from "./help.js";
+import { log_received_message } from "./log.js";
+import { markov } from "./markov.js";
+import { olid } from "./olid.js";
+import { quotes } from "./quotes.js";
+import { yes_no } from "./yes_no.js";
+import { TwitchStreams } from "./twitch.js";
 
 
 export const client = new Discord.Client();
@@ -16,13 +16,13 @@ export const client = new Discord.Client();
  * The ready event is vital, it means that only _after_ this will your bot start reacting to information
  * received from Discord
  */
-client.on('ready', () => {
+client.on("ready", async () => {
     console.log(`${config.bot_name} is ready.`);
-    twitch(client);
+    await TwitchStreams.factory(client);
 });
 
 // Create an event listener for messages
-client.on('message', message => {
+client.on("message", message => {
     log_received_message(message);
     help(message);
     olid(message);
@@ -33,5 +33,5 @@ client.on('message', message => {
 });
 
 client.login(config.token)
-    .then(() => console.log('Logging in ...'))
+    .then(() => console.log("Logging in ..."))
     .catch(console.error);
