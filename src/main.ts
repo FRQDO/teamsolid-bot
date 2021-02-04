@@ -16,9 +16,9 @@ export const client = new Discord.Client();
  * The ready event is vital, it means that only _after_ this will your bot start reacting to information
  * received from Discord
  */
-client.on("ready", async () => {
+client.on("ready", () => {
     console.log(`${config.bot_name} is ready.`);
-    await TwitchStreams.factory(client);
+    void TwitchStreams.factory(client);
 });
 
 // Create an event listener for messages

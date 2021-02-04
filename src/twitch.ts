@@ -1,57 +1,78 @@
 import { ApiClient } from "twitch";
 import { HelixUser, HelixStream } from "twitch";
 import { ClientCredentialsAuthProvider } from "twitch-auth";
-import Discord, { TextChannel } from 'discord.js';
+import Discord, { TextChannel, Message } from "discord.js";
 
-import { config } from './config.js';
-
-
-const client_id = config.twitch.client_id;
-const client_secret = config.twitch.client_secret;
-const update_interval = config.twitch.update_interval;
-const userNames = config.twitch.streams;
+import { config } from "./config.js";
 
 
-const authProvider = new ClientCredentialsAuthProvider(client_id, client_secret);
+const CLIENT_ID = config.twitch.client_id;
+const CLIENT_SECRET = config.twitch.client_secret;
+const UPDATE_INTERVAL = config.twitch.update_interval;
+//const USER_NAMES = config.twitch.streams;
+const CHANNEL_ID = config.twitch.channel_id;
+const PREFIX = config.prefix;
+const COMMAND = config.twitch.command;
+const C = config.twitch.c;
+
+const authProvider = new ClientCredentialsAuthProvider(CLIENT_ID, CLIENT_SECRET);
 const apiClient = new ApiClient({ authProvider: authProvider });
 
 
-class TwitchStreams {
-    users = new Map<string, { helixUser: HelixUser, stream?: HelixStream }>();
+export interface ITwitchConfig {
+    client_id: string;
+    client_secret: string;
+    streams: string[];
+    update_interval: number;
+    channel_id: string;
+    command: string;
+    c: string;
+}
+
+
+export class TwitchStreams {
+    users = new Map<string, { helixUser: HelixUser, helixStream?: HelixStream }>();
     client: Discord.Client;
 
-    constructor(client: Discord.Client) {
+    private constructor(client: Discord.Client) {
         this.client = client;
     }
 
-    async init(userNames: string[]) {
-        const helixUsers = await apiClient.helix.users.getUsersByNames(userNames);
+    static async factory(client: Discord.Client): Promise<TwitchStreams> {
+        const twitchStreams = new TwitchStreams(client);
+        const helixUsers = await apiClient.helix.users.getUsersByNames(config.twitch.streams);
         for (const user of helixUsers) {
-            this.users.set(user.displayName, { helixUser: user });
+            twitchStreams.users.set(user.displayName, { helixUser: user });
         }
+        await twitchStreams.initStreams();
+        setInterval(() => void twitchStreams.update(), UPDATE_INTERVAL);
+        client.on("message", message => {
+            twitchStreams.command(message);
+        });
+        return twitchStreams;
     }
 
-    async initStreams() {
+    async initStreams(): Promise<void> {
         const streams = await this.getStreams();
         for (const stream of streams) {
             const userObject = this.users.get(stream.userDisplayName);
             if (userObject !== undefined) {
-                userObject.stream = stream;
+                userObject.helixStream = stream;
             }
         }
     }
 
     getUserIdArray(): string[] {
-        return Array.from(this.users).map(([_, value]) => value.helixUser.id);
+        return Array.from(this.users).map(([, value]) => value.helixUser.id);
     }
 
-    async getStreams() {
+    async getStreams(): Promise<HelixStream[]> {
         const streamsPaginated = await apiClient.helix.streams.getStreams({ userId: this.getUserIdArray() });
         // Missing handling pagination
         return streamsPaginated.data;
     }
 
-    async update() {
+    async update(): Promise<void> {
         console.log("Updating streams ...");
         const streams = await this.getStreams();
         for (const [user, userObject] of this.users) {
@@ -62,54 +83,90 @@ class TwitchStreams {
                     break;
                 }
             }
-            if (userObject.stream === undefined && stream !== undefined) {
+            if (userObject.helixStream === undefined && stream !== undefined) {
                 // new stream
-                userObject.stream = stream;
+                userObject.helixStream = stream;
                 console.log(`${user} startet streaming.`);
-                this.send_live_notification(userObject.stream);
-            } else if (userObject.stream !== undefined && stream === undefined) {
+                void this.send_live_notification(userObject.helixStream);
+            } else if (userObject.helixStream !== undefined && stream === undefined) {
                 // stream went offline
-                userObject.stream = undefined;
+                userObject.helixStream = undefined;
                 console.log(`${user} went offline.`);
             }
         }
     }
 
-    log() {
+    log(): void {
         for (const [user, userObject] of this.users) {
             console.log(`Stream: ${user}`);
-            if (userObject.stream !== undefined) {
-                console.log(`Title: ${userObject.stream.title}\n` +
-                    `Starttime: ${userObject.stream.startDate.toTimeString()}\n` +
-                    `Viewers: ${userObject.stream.viewers}\n`);
+            if (userObject.helixStream !== undefined) {
+                console.log(`Title: ${userObject.helixStream.title}\n` +
+                    `Starttime: ${userObject.helixStream.startDate.toTimeString()}\n` +
+                    `Viewers: ${userObject.helixStream.viewers}\n`);
             }
         }
     }
 
     get_channel(): TextChannel | undefined {
-        const channel_id = config.twitch.channel_id;
-        return this.client.channels.cache.get(channel_id) as TextChannel | undefined;
+        return this.client.channels.cache.get(CHANNEL_ID) as TextChannel | undefined;
     }
 
-    async send_live_notification(stream: HelixStream) {
+    async send_live_notification(stream: HelixStream): Promise<void> {
         const thumbnail = stream.thumbnailUrl.replace("{width}", "480").replace("{height}", "270");
         const title = `${stream.userDisplayName} started streaming.`;
         const url = `https://twitch.tv/${stream.userDisplayName}`;
-        let category: string | undefined = (await stream.getGame())?.name;
+        const category: string | undefined = (await stream.getGame())?.name;
         const embed = new Discord.MessageEmbed()
-            .setColor('#0099ff')
+            .setColor("#0099ff")
             .setTitle(title)
             .setURL(url)
             .setDescription(`${stream.title}`)
             .setImage(thumbnail)
             .setFooter(category);
-        this.get_channel()?.send(embed);
+        void this.get_channel()?.send(embed);
     }
-}
 
-export async function twitch(client: Discord.Client) {
-    const twitchStreams = new TwitchStreams(client);
-    await twitchStreams.init(userNames);
-    await twitchStreams.initStreams();
-    setInterval(_ => { void twitchStreams.update(); }, update_interval);
+    help(): void {
+        console.log("help todo");
+    }
+
+    async add_stream(stream: string): Promise<void> {
+        console.log(`Adding stream: ${stream}`);
+        const helixUser = await apiClient.helix.users.getUserByName(stream);
+        const helixStream = await apiClient.helix.streams.getStreamByUserName(stream);
+        if (helixUser !== null && helixStream !== null) {
+            this.users.set(stream, {
+                helixUser: helixUser,
+                helixStream: helixStream,
+            });
+            console.log("save config todo");
+        } else {
+            console.log("could not find add stream error todo");
+        }
+    }
+
+    remove_stream(stream: string): void {
+        console.log(`Removing stream: ${stream}`);
+        this.users.delete(stream);
+        config.twitch.streams = config.twitch.streams.filter(e => e !== stream);
+        console.log("save config todo");
+    }
+
+    command(message: Message): void {
+        const trimed_content = message.content.trim();
+        if (trimed_content.startsWith(`${PREFIX}${COMMAND}`) || trimed_content.startsWith(`${PREFIX}${C}`)) {
+            const content_array = trimed_content.split(" ");
+            if (content_array.length !== 2) {
+                console.log(content_array);
+                this.help();
+            } else {
+                const new_stream = content_array[1];
+                if (config.twitch.streams.includes(new_stream)) {
+                    this.remove_stream(new_stream);
+                } else {
+                    void this.add_stream(new_stream);
+                }
+            }
+        }
+    }
 }

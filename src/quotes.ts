@@ -47,6 +47,7 @@ export function quotes(message: Message): void {
         message.content.trim().startsWith(`${config.prefix}${c}`)
     ) {
         // Save or Delete quote
+        // remove prefix and command-string
         let prefix_length = 0;
         if (message.content.trim().startsWith(`${config.prefix}${command}`)) {
             prefix_length = `${config.prefix}${command}`.length;
