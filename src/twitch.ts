@@ -3,17 +3,17 @@ import { HelixUser, HelixStream } from "twitch";
 import { ClientCredentialsAuthProvider } from "twitch-auth";
 import Discord, { TextChannel, Message } from "discord.js";
 
-import { config } from "./config.js";
+import { config_object } from "./config.js";
 
 
-const CLIENT_ID = config.twitch.client_id;
-const CLIENT_SECRET = config.twitch.client_secret;
-const UPDATE_INTERVAL = config.twitch.update_interval;
-//const USER_NAMES = config.twitch.streams;
-const CHANNEL_ID = config.twitch.channel_id;
-const PREFIX = config.prefix;
-const COMMAND = config.twitch.command;
-const C = config.twitch.c;
+const CLIENT_ID = config_object.data.twitch.client_id;
+const CLIENT_SECRET = config_object.data.twitch.client_secret;
+const UPDATE_INTERVAL = config_object.data.twitch.update_interval;
+//const USER_NAMES = config_object.data.twitch.streams;
+const CHANNEL_ID = config_object.data.twitch.channel_id;
+const PREFIX = config_object.data.prefix;
+const COMMAND = config_object.data.twitch.command;
+const C = config_object.data.twitch.c;
 
 const authProvider = new ClientCredentialsAuthProvider(CLIENT_ID, CLIENT_SECRET);
 const apiClient = new ApiClient({ authProvider: authProvider });
@@ -40,7 +40,7 @@ export class TwitchStreams {
 
     static async factory(client: Discord.Client): Promise<TwitchStreams> {
         const twitchStreams = new TwitchStreams(client);
-        const helixUsers = await apiClient.helix.users.getUsersByNames(config.twitch.streams);
+        const helixUsers = await apiClient.helix.users.getUsersByNames(config_object.data.twitch.streams);
         for (const user of helixUsers) {
             twitchStreams.users.set(user.displayName, { helixUser: user });
         }
@@ -139,7 +139,7 @@ export class TwitchStreams {
                 helixUser: helixUser,
                 helixStream: helixStream,
             });
-            console.log("save config todo");
+            config_object.save();
         } else {
             console.log("could not find add stream error todo");
         }
@@ -148,7 +148,7 @@ export class TwitchStreams {
     remove_stream(stream: string): void {
         console.log(`Removing stream: ${stream}`);
         this.users.delete(stream);
-        config.twitch.streams = config.twitch.streams.filter(e => e !== stream);
+        config_object.data.twitch.streams = config_object.data.twitch.streams.filter(e => e !== stream);
         console.log("save config todo");
     }
 
@@ -161,7 +161,7 @@ export class TwitchStreams {
                 this.help();
             } else {
                 const new_stream = content_array[1];
-                if (config.twitch.streams.includes(new_stream)) {
+                if (config_object.data.twitch.streams.includes(new_stream)) {
                     this.remove_stream(new_stream);
                 } else {
                     void this.add_stream(new_stream);

@@ -1,8 +1,9 @@
 import { Message, NewsChannel, TextChannel } from "discord.js";
 import fs from "fs";
 import { resolve } from "path";
-import { config } from "./config.js";
+import { config_object } from "./config.js";
 import { client } from "./main.js";
+
 
 export function log_received_message(message: Message): void {
     log_to_file(message);
@@ -29,15 +30,15 @@ function log_to_file(message: Message): void {
     if (
         message.author.id !== client.user?.id &&
         !(
-            message.content.startsWith(`${config.prefix}`) ||
-            message.content.startsWith(`${config.prefix}`)
+            message.content.startsWith(`${config_object.data.prefix}`) ||
+            message.content.startsWith(`${config_object.data.prefix}`)
         )
     ) {
         const server = message.guild?.name ?? "";
         const channel = (message.channel as TextChannel | NewsChannel).name ?? "";
         const username: string = message.author.username;
         const log_file = server + channel !== "" ? `${server}_${channel}.log` : `${username}.log`;
-        const absolute_log_path: string = resolve(config.data_dir, "log");
+        const absolute_log_path: string = resolve(config_object.data.data_dir, "log");
 
         if (fs.existsSync(absolute_log_path)) {
             fs.appendFileSync(resolve(absolute_log_path, log_file), message.content);

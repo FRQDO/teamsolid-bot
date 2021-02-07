@@ -1,5 +1,5 @@
 import { Message } from "discord.js";
-import { config } from "./config.js";
+import { IConfig, config_object } from "./config.js";
 import { log_sended_message } from "./log.js";
 import { olid_help } from "./olid.js";
 import { quotes_help } from "./quotes.js";
@@ -7,6 +7,7 @@ import { yes_no_help } from "./yes_no.js";
 import { markov_help } from "./markov.js";
 
 
+const config: IConfig = config_object.data;
 const command = "help";
 const c = "h";
 const help_text =

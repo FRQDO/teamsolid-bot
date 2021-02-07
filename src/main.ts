@@ -1,5 +1,5 @@
 import Discord from "discord.js";
-import { config } from "./config.js";
+import { config_object } from "./config.js";
 import { good_bot_bad_bot } from "./good_bot_bad_bot.js";
 import { help } from "./help.js";
 import { log_received_message } from "./log.js";
@@ -17,7 +17,7 @@ export const client = new Discord.Client();
  * received from Discord
  */
 client.on("ready", () => {
-    console.log(`${config.bot_name} is ready.`);
+    console.log(`${config_object.data.bot_name} is ready.`);
     void TwitchStreams.factory(client);
 });
 
@@ -32,6 +32,6 @@ client.on("message", message => {
     markov(message);
 });
 
-client.login(config.token)
+client.login(config_object.data.token)
     .then(() => console.log("Logging in ..."))
     .catch(console.error);

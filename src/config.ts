@@ -14,25 +14,34 @@ export interface IConfig {
 }
 
 // Load Configuration
-const relative_config_path = "../settings.json";
-const script_dir: string = path.dirname(fileURLToPath(import.meta.url));
-const absolute_config_path: string = path.resolve(script_dir, relative_config_path);
-let file_string: string;
-try {
-    file_string = fs.readFileSync(absolute_config_path, "utf-8");
-} catch (error) {
-    console.error("settings.json not found.");
-    process.exit(1);
+const RELATIVE_CONFIG_PATH = "../settings.json";
+const SCRIPT_DIR: string = path.dirname(fileURLToPath(import.meta.url));
+
+class Config {
+    data: IConfig;
+    absolute_config_path: string
+
+    constructor() {
+        this.absolute_config_path = path.resolve(SCRIPT_DIR, RELATIVE_CONFIG_PATH);
+        let file_string: string;
+        try {
+            file_string = fs.readFileSync(this.absolute_config_path, "utf-8");
+        } catch (error) {
+            console.error("settings.json not found.");
+            process.exit(1);
+        }
+        this.data = JSON.parse(file_string) as IConfig;
+    }
+
+    save() {
+        const config_string = JSON.stringify(this.data, null, 4);
+        fs.writeFileSync(this.absolute_config_path, config_string);
+    }
+
+    set_makrov_last_used(last_used: string): void {
+        this.data.markov_last_used = last_used;
+        this.save();
+    }
 }
 
-export const config: IConfig = JSON.parse(file_string) as IConfig;
-
-function save() {
-    const config_string = JSON.stringify(config, null, 4);
-    fs.writeFileSync(absolute_config_path, config_string);
-}
-
-export function set_makrov_last_used(last_used: string): void {
-    config.markov_last_used = last_used;
-    save();
-}
+export const config_object = new Config();
