@@ -17,15 +17,7 @@ export interface ITwitchConfig {
 
 
 const twitch_config = config_object.data.twitch as ITwitchConfig;
-// config_object.data.twitch = {
-//     client_id: string;
-//     client_secret: string;
-//     streams: string[];
-//     update_interval: number;
-//     channel_id: string;
-//     command: string;
-//     c: string;
-// } as ITwitchConfig;
+
 
 const CLIENT_ID = twitch_config.client_id;
 const CLIENT_SECRET = twitch_config.client_secret;
