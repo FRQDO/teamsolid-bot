@@ -18,7 +18,12 @@ export const client = new Discord.Client();
  */
 client.on("ready", () => {
     console.log(`${config_object.data.bot_name} is ready.`);
-    void TwitchStreams.factory(client);
+    void TwitchStreams.factory(client).catch(
+        (e) => {
+            console.error("[ERROR]", (<Error>e).message);
+            process.exit(1);
+        }
+    );
 });
 
 // Create an event listener for messages

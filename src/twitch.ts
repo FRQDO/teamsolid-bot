@@ -35,13 +35,20 @@ const apiClient = new ApiClient({ authProvider: authProvider });
 export class TwitchStreams {
     users = new Map<string, { helixUser: HelixUser, helixStream?: HelixStream }>();
     client: Discord.Client;
+    CLIENT_ID: string;
 
     private constructor(client: Discord.Client) {
         this.client = client;
+        if (twitch_config.client_id === undefined) {
+            throw new Error("x");
+        } else {
+            this.CLIENT_ID = twitch_config.client_id;
+        }
     }
 
     static async factory(client: Discord.Client): Promise<TwitchStreams> {
-        const twitchStreams = new TwitchStreams(client);
+        const twitchStreams: TwitchStreams = new TwitchStreams(client);
+
         const helixUsers = await apiClient.helix.users.getUsersByNames(twitch_config.streams);
         for (const user of helixUsers) {
             twitchStreams.users.set(user.displayName, { helixUser: user });
