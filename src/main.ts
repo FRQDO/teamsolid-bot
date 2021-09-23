@@ -9,6 +9,7 @@ import { olid } from "./olid.js";
 import { quotes } from "./quotes.js";
 import { yes_no } from "./yes_no.js";
 import { TwitchStreams } from "./twitch.js";
+import { mock } from "./mock.js";
 
 
 export const client = new Discord.Client({
@@ -38,6 +39,7 @@ client.on("messageCreate", message => {
     quotes(message);
     yes_no(message);
     markov(message);
+    mock(message);
 });
 
 client.login(config_object.data.token)
