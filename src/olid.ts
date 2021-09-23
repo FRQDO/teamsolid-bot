@@ -36,4 +36,10 @@ export function olid(message: Message): void {
             .then(log_sended_message)
             .catch(console.error);
     }
+    if (message.content.toLocaleLowerCase().includes("olid")
+    ) {
+        message.react("👋")
+            .then(() => console.log("Reacting: 👋"))
+            .catch(console.error);
+    }
 }
