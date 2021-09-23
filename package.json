@@ -5,9 +5,10 @@
     "main": "index.js",
     "license": "AGPL-3.0-or-later",
     "dependencies": {
+        "@twurple/api": "^5.0.4",
+        "@twurple/auth": "^5.0.4",
         "discord.js": "^12.5.1",
-        "ts-markov": "^1.0.0",
-        "twitch": "^4.4.7"
+        "ts-markov": "^1.0.0"
     },
     "devDependencies": {
         "@types/node": "^14",

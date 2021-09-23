@@ -1,6 +1,6 @@
-import { ApiClient } from "twitch";
-import { HelixUser, HelixStream } from "twitch";
-import { ClientCredentialsAuthProvider } from "twitch-auth";
+import { ApiClient } from "@twurple/api";
+import { HelixUser, HelixStream } from "@twurple/api";
+import { ClientCredentialsAuthProvider } from "@twurple/auth";
 import Discord, { TextChannel, Message } from "discord.js";
 
 import { config_object } from "./config.js";
@@ -29,7 +29,12 @@ const COMMAND = twitch_config.command;
 const C = twitch_config.c;
 
 const authProvider = new ClientCredentialsAuthProvider(CLIENT_ID, CLIENT_SECRET);
-const apiClient = new ApiClient({ authProvider: authProvider });
+const apiClient = new ApiClient({
+    authProvider: authProvider,
+    logger: {
+        minLevel: 'debug'
+    }
+});
 
 
 export class TwitchStreams {
@@ -49,7 +54,7 @@ export class TwitchStreams {
     static async factory(client: Discord.Client): Promise<TwitchStreams> {
         const twitchStreams: TwitchStreams = new TwitchStreams(client);
 
-        const helixUsers = await apiClient.helix.users.getUsersByNames(twitch_config.streams);
+        const helixUsers = await apiClient.users.getUsersByNames(twitch_config.streams);
         for (const user of helixUsers) {
             twitchStreams.users.set(user.displayName, { helixUser: user });
         }
@@ -76,7 +81,7 @@ export class TwitchStreams {
     }
 
     async getStreams(): Promise<HelixStream[]> {
-        const streamsPaginated = await apiClient.helix.streams.getStreams({ userId: this.getUserIdArray() });
+        const streamsPaginated = await apiClient.streams.getStreams({ userId: this.getUserIdArray() });
         // Missing handling pagination
         return streamsPaginated.data;
     }
@@ -141,8 +146,8 @@ export class TwitchStreams {
 
     async add_stream(stream: string): Promise<void> {
         console.log(`Adding stream: ${stream}`);
-        const helixUser = await apiClient.helix.users.getUserByName(stream);
-        const helixStream = await apiClient.helix.streams.getStreamByUserName(stream);
+        const helixUser = await apiClient.users.getUserByName(stream);
+        const helixStream = await apiClient.streams.getStreamByUserName(stream);
         if (helixUser !== null && helixStream !== null) {
             this.users.set(stream, {
                 helixUser: helixUser,
