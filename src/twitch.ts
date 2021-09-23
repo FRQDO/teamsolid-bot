@@ -31,9 +31,9 @@ const C = twitch_config.c;
 const authProvider = new ClientCredentialsAuthProvider(CLIENT_ID, CLIENT_SECRET);
 const apiClient = new ApiClient({
     authProvider: authProvider,
-    logger: {
-        minLevel: 'debug'
-    }
+    // logger: {
+    //     minLevel: 'debug'
+    // }
 });
 
 
@@ -60,7 +60,7 @@ export class TwitchStreams {
         }
         await twitchStreams.initStreams();
         setInterval(() => void twitchStreams.update(), UPDATE_INTERVAL);
-        client.on("message", message => {
+        client.on("messageCreate", message => {
             twitchStreams.command(message);
         });
         return twitchStreams;
@@ -135,9 +135,11 @@ export class TwitchStreams {
             .setTitle(title)
             .setURL(url)
             .setDescription(`${stream.title}`)
-            .setImage(thumbnail)
-            .setFooter(category);
-        void this.get_channel()?.send(embed);
+            .setImage(thumbnail);
+        if (category != undefined) {
+            embed.setFooter(category);
+        }
+        void this.get_channel()?.send({ embeds: [embed] });
     }
 
     help(): void {
