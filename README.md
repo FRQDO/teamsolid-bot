@@ -24,6 +24,8 @@
 * https://discordjs.guide/
 * https://discord.js.org/
 * https://discord.com/developers/applications
+* https://github.com/twurple/twurple
+* https://twurple.js.org/
 
 ## Install
 
@@ -38,7 +40,7 @@
 * `git clone ...`
 * Install dependencies: `yarn install --dev`
 * yarn tsc
-* `chmod 755 teamsolid-bot`
+* `chmod 755 tsai`
 
 ## Config
 
@@ -65,7 +67,7 @@ tmux new-session -d -s tsb 'node dist/main.js'
 or:
 
 ~~~bash
-./teamsolid-bot
+./tsai
 ~~~
 
 ### Attach Session
