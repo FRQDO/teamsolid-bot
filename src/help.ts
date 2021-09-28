@@ -5,6 +5,7 @@ import { olid_help } from "./olid.js";
 import { quotes_help } from "./quotes.js";
 import { yes_no_help } from "./yes_no.js";
 import { markov_help } from "./markov.js";
+import { mock_help } from "./mock.js";
 
 
 const command = "help";
@@ -21,6 +22,8 @@ ${olid_help}
 ${quotes_help}
 
 ${yes_no_help}
+
+${mock_help}
 
 ${markov_help}`;
 
