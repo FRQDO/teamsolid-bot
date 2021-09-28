@@ -10,6 +10,7 @@ import { quotes } from "./quotes.js";
 import { yes_no } from "./yes_no.js";
 import { TwitchStreams } from "./twitch.js";
 import { mock } from "./mock.js";
+import { clap } from "./clap.js";
 
 
 export const client = new Discord.Client({
@@ -40,6 +41,7 @@ client.on("messageCreate", message => {
     yes_no(message);
     markov(message);
     mock(message);
+    clap(message);
 });
 
 client.login(config_object.data.token)
