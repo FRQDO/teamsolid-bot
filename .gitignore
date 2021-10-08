@@ -5,6 +5,7 @@
 config.py
 settings.json
 data/
+error.log
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/linux,macos,python,pycharm,windows,visualstudiocode,node
