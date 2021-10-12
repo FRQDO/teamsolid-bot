@@ -87,26 +87,30 @@ export class TwitchStreams {
     }
 
     async update(): Promise<void> {
-        console.log("Updating streams ...");
-        const streams = await this.getStreams();
-        for (const [user, userObject] of this.users) {
-            let stream: HelixStream | undefined;
-            for (const s of streams) {
-                if (user === s.userDisplayName) {
-                    stream = s;
-                    break;
+        try {
+            console.log("Updating streams ...");
+            const streams = await this.getStreams();
+            for (const [user, userObject] of this.users) {
+                let stream: HelixStream | undefined;
+                for (const s of streams) {
+                    if (user === s.userDisplayName) {
+                        stream = s;
+                        break;
+                    }
+                }
+                if (userObject.helixStream === undefined && stream !== undefined) {
+                    // new stream
+                    userObject.helixStream = stream;
+                    console.log(`${user} startet streaming.`);
+                    void this.send_live_notification(userObject.helixStream);
+                } else if (userObject.helixStream !== undefined && stream === undefined) {
+                    // stream went offline
+                    userObject.helixStream = undefined;
+                    console.log(`${user} went offline.`);
                 }
             }
-            if (userObject.helixStream === undefined && stream !== undefined) {
-                // new stream
-                userObject.helixStream = stream;
-                console.log(`${user} startet streaming.`);
-                void this.send_live_notification(userObject.helixStream);
-            } else if (userObject.helixStream !== undefined && stream === undefined) {
-                // stream went offline
-                userObject.helixStream = undefined;
-                console.log(`${user} went offline.`);
-            }
+        } catch (e) {
+            console.error(e);
         }
     }
 
